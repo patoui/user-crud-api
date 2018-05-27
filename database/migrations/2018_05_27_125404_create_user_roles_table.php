@@ -13,10 +13,12 @@ class CreateUserRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_roles', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('label')->nullable();
-        });
+        if (! Schema::hasTable('user_addresses')) {
+            Schema::create('user_roles', function (Blueprint $table) {
+                $table->increments('id');
+                $table->string('label')->nullable();
+            });
+        }
     }
 
     /**
