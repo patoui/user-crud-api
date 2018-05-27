@@ -52,7 +52,7 @@ class UserApiController extends Controller
      */
     public function show($id)
     {
-        return User::whereKey($id)->first();
+        return User::whereKey($id)->firstOrFail();
     }
 
     /**
@@ -70,7 +70,7 @@ class UserApiController extends Controller
             'email' => 'required|email',
         ]);
 
-        $user = User::whereKey($id)->first();
+        $user = User::whereKey($id)->firstOrFail();
 
         // Fetch username and email from request
         $data = $request->only(['username', 'email']);
@@ -96,7 +96,7 @@ class UserApiController extends Controller
      */
     public function destroy($id)
     {
-        $user = User::whereKey($id)->first();
+        $user = User::whereKey($id)->firstOrFail();
 
         $user->delete();
 
