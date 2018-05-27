@@ -27,3 +27,9 @@ $factory->state(User::class, 'admin', [
         return factory(Role::class)->states(['admin'])->create()->id;
     },
 ]);
+
+$factory->state(User::class, 'public-user', [
+    'user_roles_id' => function () {
+        return factory(Role::class)->states(['public-user'])->create()->id;
+    },
+]);

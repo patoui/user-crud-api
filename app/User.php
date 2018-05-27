@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Hashids;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
@@ -21,12 +22,8 @@ class User extends Authenticatable
         'email',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
+    public function getRouteKey()
+    {
+        return Hashids::encode($this->getKey());
+    }
 }

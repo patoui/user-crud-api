@@ -21,3 +21,8 @@ Route::middleware('auth:api')->post('/users', [
     'as' => 'api.user.store',
     'uses' => 'UserApiController@store'
 ]);
+
+Route::middleware('auth:api')->get('/users/{user}', [
+    'as' => 'api.user.show',
+    'uses' => 'UserApiController@show'
+]);
