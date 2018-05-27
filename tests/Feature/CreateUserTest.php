@@ -11,6 +11,8 @@ use Tests\TestCase;
 
 class CreateUserTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * @test
      * Test if a user can be created

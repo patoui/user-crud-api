@@ -11,6 +11,8 @@ use Tests\TestCase;
 
 class UpdateUserTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * @test
      * Test if a user can be updated
@@ -38,6 +40,7 @@ class UpdateUserTest extends TestCase
         // Assert
         $response->assertStatus(200);
         $readUser = $readUser->fresh(); // get the updated user model
-        $response->assertExactJson($readUser->toArray());
+        $response->assertJson(['username' => 'Foo Bar']);
+        $response->assertJson(['email' => 'foo.bar@test.com']);
     }
 }

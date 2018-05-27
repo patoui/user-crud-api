@@ -10,6 +10,8 @@ use Tests\TestCase;
 
 class ReadUserTest extends TestCase
 {
+    use RefreshDatabase;
+
     /**
      * @test
      * Test if a user can be read
@@ -31,6 +33,7 @@ class ReadUserTest extends TestCase
 
         // Assert
         $response->assertStatus(200);
-        $response->assertExactJson($readUser->toArray());
+        $response->assertJson(['username' => 'Jane Doe']);
+        $response->assertJson(['email' => 'jane.doe@test.com']);
     }
 }
