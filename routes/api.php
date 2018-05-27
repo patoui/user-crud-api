@@ -26,3 +26,8 @@ Route::middleware('auth:api')->get('/users/{user}', [
     'as' => 'api.user.show',
     'uses' => 'UserApiController@show'
 ]);
+
+Route::middleware('auth:api')->put('/users/{user}', [
+    'as' => 'api.user.update',
+    'uses' => 'UserApiController@update'
+]);

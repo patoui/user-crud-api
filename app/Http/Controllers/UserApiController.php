@@ -64,7 +64,28 @@ class UserApiController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'role' => 'required|string|exists:user_roles,label',
+            'username' => 'required|string',
+            'email' => 'required|email',
+        ]);
+
+        $user = User::whereKey($id)->first();
+
+        // Fetch username and email from request
+        $data = $request->only(['username', 'email']);
+
+        // Find role label id
+        $roleId = Role::where('label', $request->input('role'))->value('id');
+
+        if ($user->user_roles_id !== $roleId) {
+            $data['user_roles_id'] = $roleId;
+        }
+
+        $user->fill($data);
+        $user->save();
+
+        return $user;
     }
 
     /**

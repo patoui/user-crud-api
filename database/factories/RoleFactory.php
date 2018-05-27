@@ -15,6 +15,12 @@ $factory->state(Role::class, 'admin', function (Faker $faker) {
     ];
 });
 
+$factory->state(Role::class, 'publisher', function (Faker $faker) {
+    return [
+        'label' => 'Publisher',
+    ];
+});
+
 $factory->state(Role::class, 'public-user', function (Faker $faker) {
     return [
         'label' => 'Public User',
