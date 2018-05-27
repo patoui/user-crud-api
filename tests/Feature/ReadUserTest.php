@@ -12,7 +12,7 @@ class ReadUserTest extends TestCase
 {
     /**
      * @test
-     * Test if a user can be created
+     * Test if a user can be read
      *
      * @return void
      */
@@ -31,6 +31,6 @@ class ReadUserTest extends TestCase
 
         // Assert
         $response->assertStatus(200);
-        $response->assertExactJson([$readUser->toArray()]);
+        $response->assertExactJson($readUser->toArray());
     }
 }
