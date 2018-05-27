@@ -96,6 +96,10 @@ class UserApiController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::whereKey($id)->first();
+
+        $user->delete();
+
+        return [];
     }
 }

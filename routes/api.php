@@ -31,3 +31,8 @@ Route::middleware('auth:api')->put('/users/{user}', [
     'as' => 'api.user.update',
     'uses' => 'UserApiController@update'
 ]);
+
+Route::middleware('auth:api')->delete('/users/{user}', [
+    'as' => 'api.user.destroy',
+    'uses' => 'UserApiController@destroy'
+]);
