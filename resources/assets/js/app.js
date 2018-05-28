@@ -16,7 +16,8 @@ window.Vue = require('vue');
  */
 
 Vue.component('user-table', require('./components/UserTable.vue'));
-Vue.component('user-edit-modal', require('./components/UserEditModal.vue'));
+Vue.component('user-update-modal', require('./components/UserUpdateModal.vue'));
+Vue.component('user-create-modal', require('./components/UserCreateModal.vue'));
 
 const app = new Vue({
     el: '#app'

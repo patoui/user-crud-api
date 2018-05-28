@@ -1072,53 +1072,7 @@ module.exports = function normalizeComponent (
 
 
 /***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var disposed = false
-var normalizeComponent = __webpack_require__(9)
-/* script */
-var __vue_script__ = __webpack_require__(38)
-/* template */
-var __vue_template__ = __webpack_require__(39)
-/* template functional */
-var __vue_template_functional__ = false
-/* styles */
-var __vue_styles__ = null
-/* scopeId */
-var __vue_scopeId__ = null
-/* moduleIdentifier (server only) */
-var __vue_module_identifier__ = null
-var Component = normalizeComponent(
-  __vue_script__,
-  __vue_template__,
-  __vue_template_functional__,
-  __vue_styles__,
-  __vue_scopeId__,
-  __vue_module_identifier__
-)
-Component.options.__file = "resources/assets/js/components/UserEditModal.vue"
-
-/* hot reload */
-if (false) {(function () {
-  var hotAPI = require("vue-hot-reload-api")
-  hotAPI.install(require("vue"), false)
-  if (!hotAPI.compatible) return
-  module.hot.accept()
-  if (!module.hot.data) {
-    hotAPI.createRecord("data-v-093412de", Component.options)
-  } else {
-    hotAPI.reload("data-v-093412de", Component.options)
-  }
-  module.hot.dispose(function (data) {
-    disposed = true
-  })
-})()}
-
-module.exports = Component.exports
-
-
-/***/ }),
+/* 10 */,
 /* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1148,7 +1102,8 @@ window.Vue = __webpack_require__(33);
  */
 
 Vue.component('user-table', __webpack_require__(36));
-Vue.component('user-edit-modal', __webpack_require__(10));
+Vue.component('user-update-modal', __webpack_require__(52));
+Vue.component('user-create-modal', __webpack_require__(55));
 
 var app = new Vue({
   el: '#app'
@@ -13369,8 +13324,8 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__UserEditModal_vue__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__UserEditModal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__UserEditModal_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__UserUpdateModal_vue__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__UserUpdateModal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__UserUpdateModal_vue__);
 //
 //
 //
@@ -13433,7 +13388,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.user = user;
             this.isActive = !this.isActive;
         },
-        onSaveAndClose: function onSaveAndClose() {
+        onSave: function onSave() {
             this.isActive = false;
         },
         onClose: function onClose() {
@@ -13444,7 +13399,180 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 38 */
+/* 38 */,
+/* 39 */,
+/* 40 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "table",
+    { ref: "container", staticClass: "table", staticStyle: { width: "100%" } },
+    [
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "tbody",
+        _vm._l(_vm.dataUsers, function(user) {
+          return _c("tr", { key: user.encoded_id }, [
+            _c("td", [_vm._v(_vm._s(user.username))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(user.email))]),
+            _vm._v(" "),
+            _c("td", [_vm._v(_vm._s(user.role_label))]),
+            _vm._v(" "),
+            _c("td", { staticStyle: { "text-align": "right" } }, [
+              _vm._v(_vm._s(user.short_updated_at))
+            ]),
+            _vm._v(" "),
+            _c("td", { staticStyle: { "text-align": "right" } }, [
+              _c(
+                "span",
+                {
+                  staticClass: "icon has-text-info",
+                  staticStyle: { cursor: "pointer" },
+                  on: {
+                    click: function($event) {
+                      _vm.openModal(user)
+                    }
+                  }
+                },
+                [_c("i", { staticClass: "fa fa-pencil-square fa-lg" })]
+              ),
+              _vm._v(" "),
+              _vm._m(1, true)
+            ])
+          ])
+        })
+      ),
+      _vm._v(" "),
+      _c("user-update-modal", {
+        attrs: { user: _vm.user, isActive: _vm.isActive },
+        on: {
+          save: function($event) {
+            _vm.onSave()
+          },
+          close: function($event) {
+            _vm.onClose()
+          }
+        }
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("Username")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Email")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Role")]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { "text-align": "right" } }, [
+          _vm._v("Last Updated")
+        ]),
+        _vm._v(" "),
+        _c("th", { staticStyle: { "text-align": "right" } }, [_vm._v("Tools")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "span",
+      {
+        staticClass: "icon has-text-danger",
+        staticStyle: { cursor: "pointer" }
+      },
+      [_c("i", { staticClass: "fa fa-trash fa-lg" })]
+    )
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-479bad1c", module.exports)
+  }
+}
+
+/***/ }),
+/* 41 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 42 */,
+/* 43 */,
+/* 44 */,
+/* 45 */,
+/* 46 */,
+/* 47 */,
+/* 48 */,
+/* 49 */,
+/* 50 */,
+/* 51 */,
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(9)
+/* script */
+var __vue_script__ = __webpack_require__(53)
+/* template */
+var __vue_template__ = __webpack_require__(54)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/UserUpdateModal.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-3b28059c", Component.options)
+  } else {
+    hotAPI.reload("data-v-3b28059c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 53 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -13506,7 +13634,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    props: ['user', 'isActive', 'isSaved'],
+    props: ['user', 'isActive'],
 
     data: function data() {
         return {
@@ -13521,15 +13649,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     methods: {
-        saveAndClose: function saveAndClose() {
+        save: function save() {
             var self = this;
             axios.put('/api/users/' + this.user.encoded_id, {
                 username: this.user.username,
                 email: this.user.email,
                 role: this.user.role_label
             }).then(function (response) {
-                self.$emit('saveAndClose');
-                self.$el.classList.remove('is-active');
+                self.$emit('save');
             });
         },
         close: function close() {
@@ -13539,7 +13666,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 39 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -13683,7 +13810,7 @@ var render = function() {
               staticClass: "button is-success",
               on: {
                 click: function($event) {
-                  _vm.saveAndClose()
+                  _vm.save()
                 }
               }
             },
@@ -13738,107 +13865,404 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-093412de", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-3b28059c", module.exports)
   }
 }
 
 /***/ }),
-/* 40 */
+/* 55 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(9)
+/* script */
+var __vue_script__ = __webpack_require__(56)
+/* template */
+var __vue_template__ = __webpack_require__(57)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/UserCreateModal.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-433d1e5f", Component.options)
+  } else {
+    hotAPI.reload("data-v-433d1e5f", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 56 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            isActive: false,
+            user: {
+                username: '',
+                email: '',
+                role: ''
+            },
+            errors: {}
+        };
+    },
+
+
+    methods: {
+        open: function open() {
+            this.isActive = true;
+        },
+        store: function store() {
+            var self = this;
+            axios.post('/api/users', {
+                username: this.user.username,
+                email: this.user.email,
+                role: this.user.role
+            }).then(function (response) {
+                self.isActive = false;
+                // self.$emit('store');
+            }).catch(function (error) {
+                self.errors = error.response.data.errors;
+            });
+        },
+        close: function close() {
+            this.isActive = false;
+            // this.$emit('close');
+        }
+    }
+});
+
+/***/ }),
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "table",
-    { ref: "container", staticClass: "table", staticStyle: { width: "100%" } },
-    [
-      _vm._m(0),
+  return _c("div", { staticClass: "columns" }, [
+    _c(
+      "div",
+      { staticClass: "column", staticStyle: { "text-align": "right" } },
+      [
+        _c(
+          "button",
+          {
+            staticClass: "button is-success",
+            attrs: { type: "button" },
+            on: {
+              click: function($event) {
+                _vm.open()
+              }
+            }
+          },
+          [_c("i", { staticClass: "fa fa-user-plus" }), _vm._v(" Create User")]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "modal", class: { "is-active": _vm.isActive } }, [
+      _c("div", { staticClass: "modal-background" }),
       _vm._v(" "),
-      _c(
-        "tbody",
-        _vm._l(_vm.dataUsers, function(user) {
-          return _c("tr", { key: user.encoded_id }, [
-            _c("td", [_vm._v(_vm._s(user.username))]),
+      _c("div", { staticClass: "modal-card" }, [
+        _c("header", { staticClass: "modal-card-head" }, [
+          _c("p", { staticClass: "modal-card-title" }, [_vm._v("Create User")]),
+          _vm._v(" "),
+          _c("button", {
+            staticClass: "delete",
+            attrs: { "aria-label": "close" },
+            on: {
+              click: function($event) {
+                _vm.close()
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("section", { staticClass: "modal-card-body" }, [
+          _c("div", { staticClass: "field is-horizontal" }, [
+            _vm._m(0),
             _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(user.email))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(user.role_label))]),
-            _vm._v(" "),
-            _c("td", { staticStyle: { "text-align": "right" } }, [
-              _vm._v(_vm._s(user.short_updated_at))
-            ]),
-            _vm._v(" "),
-            _c("td", { staticStyle: { "text-align": "right" } }, [
-              _c(
-                "span",
-                {
-                  staticClass: "icon has-text-info",
-                  staticStyle: { cursor: "pointer" },
-                  on: {
-                    click: function($event) {
-                      _vm.openModal(user)
+            _c("div", { staticClass: "field-body" }, [
+              _c("div", { staticClass: "field" }, [
+                _c("div", { staticClass: "control" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.user.username,
+                        expression: "user.username"
+                      }
+                    ],
+                    staticClass: "input",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.user.username },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.user, "username", $event.target.value)
+                      }
                     }
-                  }
-                },
-                [_c("i", { staticClass: "fa fa-pencil-square fa-lg" })]
-              ),
-              _vm._v(" "),
-              _vm._m(1, true)
+                  })
+                ]),
+                _vm._v(" "),
+                _vm.errors.hasOwnProperty("username")
+                  ? _c(
+                      "div",
+                      _vm._l(_vm.errors.username, function(error) {
+                        return _c("p", { staticClass: "help is-danger" }, [
+                          _vm._v(_vm._s(error))
+                        ])
+                      })
+                    )
+                  : _vm._e()
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "field is-horizontal" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("div", { staticClass: "field-body" }, [
+              _c("div", { staticClass: "field" }, [
+                _c("div", { staticClass: "control" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.user.email,
+                        expression: "user.email"
+                      }
+                    ],
+                    staticClass: "input",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.user.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.user, "email", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm.errors.hasOwnProperty("email")
+                  ? _c(
+                      "div",
+                      _vm._l(_vm.errors.email, function(error) {
+                        return _c("p", { staticClass: "help is-danger" }, [
+                          _vm._v(_vm._s(error))
+                        ])
+                      })
+                    )
+                  : _vm._e()
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "field is-horizontal" }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("div", { staticClass: "field-body" }, [
+              _c("div", { staticClass: "field" }, [
+                _c("div", { staticClass: "control" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.user.role,
+                        expression: "user.role"
+                      }
+                    ],
+                    staticClass: "input",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.user.role },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.user, "role", $event.target.value)
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _vm.errors.hasOwnProperty("role")
+                  ? _c(
+                      "div",
+                      _vm._l(_vm.errors.role, function(error) {
+                        return _c("p", { staticClass: "help is-danger" }, [
+                          _vm._v(_vm._s(error))
+                        ])
+                      })
+                    )
+                  : _vm._e()
+              ])
             ])
           ])
-        })
-      ),
-      _vm._v(" "),
-      _c("user-edit-modal", {
-        attrs: { user: _vm.user, isActive: _vm.isActive },
-        on: {
-          saveAndClose: function($event) {
-            _vm.onSaveAndClose()
-          },
-          close: function($event) {
-            _vm.onClose()
-          }
-        }
-      })
-    ],
-    1
-  )
+        ]),
+        _vm._v(" "),
+        _c("footer", { staticClass: "modal-card-foot" }, [
+          _c(
+            "button",
+            {
+              staticClass: "button is-success",
+              on: {
+                click: function($event) {
+                  _vm.store()
+                }
+              }
+            },
+            [_vm._v("Save changes")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "button",
+              on: {
+                click: function($event) {
+                  _vm.close()
+                }
+              }
+            },
+            [_vm._v("Cancel")]
+          )
+        ])
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("Username")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Email")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("Role")]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { "text-align": "right" } }, [
-          _vm._v("Last Updated")
-        ]),
-        _vm._v(" "),
-        _c("th", { staticStyle: { "text-align": "right" } }, [_vm._v("Tools")])
-      ])
+    return _c("div", { staticClass: "field-label is-normal" }, [
+      _c("label", { staticClass: "label" }, [_vm._v("Username")])
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "span",
-      {
-        staticClass: "icon has-text-danger",
-        staticStyle: { cursor: "pointer" }
-      },
-      [_c("i", { staticClass: "fa fa-trash fa-lg" })]
-    )
+    return _c("div", { staticClass: "field-label is-normal" }, [
+      _c("label", { staticClass: "label" }, [_vm._v("Email")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field-label is-normal" }, [
+      _c("label", { staticClass: "label" }, [_vm._v("Role")])
+    ])
   }
 ]
 render._withStripped = true
@@ -13846,15 +14270,9 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-479bad1c", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-433d1e5f", module.exports)
   }
 }
-
-/***/ }),
-/* 41 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
 
 /***/ })
 /******/ ]);

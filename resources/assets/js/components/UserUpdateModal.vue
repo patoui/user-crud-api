@@ -45,7 +45,7 @@
                 </div>
             </section>
             <footer class="modal-card-foot">
-                <button @click="saveAndClose()" class="button is-success">Save changes</button>
+                <button @click="save()" class="button is-success">Save changes</button>
                 <button @click="close()" class="button">Cancel</button>
             </footer>
         </div>
@@ -55,7 +55,7 @@
 <script>
     export default {
 
-        props: ['user', 'isActive', 'isSaved'],
+        props: ['user', 'isActive'],
 
         data() {
             return {
@@ -69,7 +69,7 @@
         },
 
         methods: {
-            saveAndClose() {
+            save() {
                 var self = this;
                 axios.put('/api/users/' + this.user.encoded_id, {
                     username: this.user.username,
@@ -77,8 +77,7 @@
                     role: this.user.role_label
                 })
                 .then(function (response) {
-                    self.$emit('saveAndClose');
-                    self.$el.classList.remove('is-active');
+                    self.$emit('save');
                 });
             },
             close() {

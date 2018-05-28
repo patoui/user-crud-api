@@ -25,12 +25,12 @@
                 </td>
             </tr>
         </tbody>
-        <user-edit-modal :user="user" :isActive="isActive" v-on:saveAndClose="onSaveAndClose()" v-on:close="onClose()"></user-edit-modal>
+        <user-update-modal :user="user" :isActive="isActive" v-on:save="onSave()" v-on:close="onClose()"></user-update-modal>
     </table>
 </template>
 
 <script>
-    import UserEditModal from './UserEditModal.vue';
+    import UserUpdateModal from './UserUpdateModal.vue';
 
     export default {
 
@@ -60,7 +60,7 @@
                 this.user = user;
                 this.isActive = ! this.isActive;
             },
-            onSaveAndClose() {
+            onSave() {
                 this.isActive = false;
             },
             onClose() {

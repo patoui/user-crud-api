@@ -33,11 +33,7 @@
 
         <div class="section">
 
-            <div class="columns">
-                <div class="column" style="text-align: right;">
-                    <button type="button" class="button is-success"><i class="fa fa-user-plus"></i>&nbsp;New User</button>
-                </div>
-            </div>
+            <user-create-modal></user-create-modal>
 
             <user-table v-bind:users="{{ json_encode($users) }}"></user-table>
 
