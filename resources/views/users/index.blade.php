@@ -31,13 +31,7 @@
 
     <div id="app" class="container">
 
-        <div class="section">
-
-            <user-create-modal></user-create-modal>
-
-            <user-table v-bind:users="{{ json_encode($users) }}"></user-table>
-
-        </div>
+        <user-table v-bind:users="{{ json_encode($users) }}"></user-table>
 
     </div>
 

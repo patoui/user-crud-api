@@ -13324,8 +13324,10 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__UserUpdateModal_vue__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__UserUpdateModal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__UserUpdateModal_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__UserCreateModal_vue__ = __webpack_require__(55);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__UserCreateModal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__UserCreateModal_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__UserUpdateModal_vue__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__UserUpdateModal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__UserUpdateModal_vue__);
 //
 //
 //
@@ -13357,6 +13359,22 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -13377,22 +13395,32 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 email: '',
                 role_label: ''
             },
-            isActive: false
+            isCreateActive: false,
+            isEditActive: false
         };
     },
 
 
     methods: {
-        openModal: function openModal(user) {
+        openCreate: function openCreate() {
+            this.isCreateActive = true;
+        },
+        openEdit: function openEdit(user) {
             this.oldUsers = JSON.parse(JSON.stringify(this.dataUsers));
             this.user = user;
-            this.isActive = !this.isActive;
+            this.isEditActive = !this.isEditActive;
+        },
+        onStore: function onStore() {
+            this.isCreateActive = false;
         },
         onSave: function onSave() {
-            this.isActive = false;
+            this.isEditActive = false;
         },
-        onClose: function onClose() {
-            this.isActive = false;
+        onCloseCreate: function onCloseCreate() {
+            this.isCreateActive = false;
+        },
+        onCloseUpdate: function onCloseUpdate() {
+            this.isEditActive = false;
             this.dataUsers = JSON.parse(JSON.stringify(this.oldUsers));
         }
     }
@@ -13408,61 +13436,117 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "table",
-    { ref: "container", staticClass: "table", staticStyle: { width: "100%" } },
-    [
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "tbody",
-        _vm._l(_vm.dataUsers, function(user) {
-          return _c("tr", { key: user.encoded_id }, [
-            _c("td", [_vm._v(_vm._s(user.username))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(user.email))]),
-            _vm._v(" "),
-            _c("td", [_vm._v(_vm._s(user.role_label))]),
-            _vm._v(" "),
-            _c("td", { staticStyle: { "text-align": "right" } }, [
-              _vm._v(_vm._s(user.short_updated_at))
-            ]),
-            _vm._v(" "),
-            _c("td", { staticStyle: { "text-align": "right" } }, [
-              _c(
-                "span",
-                {
-                  staticClass: "icon has-text-info",
-                  staticStyle: { cursor: "pointer" },
-                  on: {
-                    click: function($event) {
-                      _vm.openModal(user)
-                    }
+  return _c("div", { staticClass: "section" }, [
+    _c(
+      "div",
+      { staticClass: "columns" },
+      [
+        _c(
+          "div",
+          { staticClass: "column", staticStyle: { "text-align": "right" } },
+          [
+            _c(
+              "button",
+              {
+                staticClass: "button is-success",
+                attrs: { type: "button" },
+                on: {
+                  click: function($event) {
+                    _vm.openCreate()
                   }
-                },
-                [_c("i", { staticClass: "fa fa-pencil-square fa-lg" })]
+                }
+              },
+              [
+                _c("i", { staticClass: "fa fa-user-plus" }),
+                _vm._v(" Create User")
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c("user-create-modal", {
+          attrs: { isActive: _vm.isCreateActive },
+          on: {
+            store: function($event) {
+              _vm.onStore()
+            },
+            closeCreate: function($event) {
+              _vm.onCloseCreate()
+            }
+          }
+        })
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c("div", { staticClass: "columns" }, [
+      _c(
+        "div",
+        { staticClass: "column", staticStyle: { "text-align": "right" } },
+        [
+          _c(
+            "table",
+            {
+              ref: "container",
+              staticClass: "table",
+              staticStyle: { width: "100%" }
+            },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _c(
+                "tbody",
+                _vm._l(_vm.dataUsers, function(user) {
+                  return _c("tr", { key: user.encoded_id }, [
+                    _c("td", [_vm._v(_vm._s(user.username))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(user.email))]),
+                    _vm._v(" "),
+                    _c("td", [_vm._v(_vm._s(user.role_label))]),
+                    _vm._v(" "),
+                    _c("td", { staticStyle: { "text-align": "right" } }, [
+                      _vm._v(_vm._s(user.short_updated_at))
+                    ]),
+                    _vm._v(" "),
+                    _c("td", { staticStyle: { "text-align": "right" } }, [
+                      _c(
+                        "span",
+                        {
+                          staticClass: "icon has-text-info",
+                          staticStyle: { cursor: "pointer" },
+                          on: {
+                            click: function($event) {
+                              _vm.openEdit(user)
+                            }
+                          }
+                        },
+                        [_c("i", { staticClass: "fa fa-pencil-square fa-lg" })]
+                      ),
+                      _vm._v(" "),
+                      _vm._m(1, true)
+                    ])
+                  ])
+                })
               ),
               _vm._v(" "),
-              _vm._m(1, true)
-            ])
-          ])
-        })
-      ),
-      _vm._v(" "),
-      _c("user-update-modal", {
-        attrs: { user: _vm.user, isActive: _vm.isActive },
-        on: {
-          save: function($event) {
-            _vm.onSave()
-          },
-          close: function($event) {
-            _vm.onClose()
-          }
-        }
-      })
-    ],
-    1
-  )
+              _c("user-update-modal", {
+                attrs: { user: _vm.user, isActive: _vm.isEditActive },
+                on: {
+                  save: function($event) {
+                    _vm.onSave()
+                  },
+                  closeUpdate: function($event) {
+                    _vm.onCloseUpdate()
+                  }
+                }
+              })
+            ],
+            1
+          )
+        ]
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -13985,17 +14069,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: ['isActive'],
+
     data: function data() {
         return {
-            isActive: false,
             user: {
                 username: '',
                 email: '',
@@ -14007,9 +14087,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
     methods: {
-        open: function open() {
-            this.isActive = true;
-        },
         store: function store() {
             var self = this;
             axios.post('/api/users', {
@@ -14017,15 +14094,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 email: this.user.email,
                 role: this.user.role
             }).then(function (response) {
-                self.isActive = false;
-                // self.$emit('store');
+                self.$emit('store');
             }).catch(function (error) {
                 self.errors = error.response.data.errors;
             });
         },
         close: function close() {
-            this.isActive = false;
-            // this.$emit('close');
+            this.$emit('closeCreate');
         }
     }
 });
@@ -14038,28 +14113,10 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "columns" }, [
-    _c(
-      "div",
-      { staticClass: "column", staticStyle: { "text-align": "right" } },
-      [
-        _c(
-          "button",
-          {
-            staticClass: "button is-success",
-            attrs: { type: "button" },
-            on: {
-              click: function($event) {
-                _vm.open()
-              }
-            }
-          },
-          [_c("i", { staticClass: "fa fa-user-plus" }), _vm._v(" Create User")]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "modal", class: { "is-active": _vm.isActive } }, [
+  return _c(
+    "div",
+    { staticClass: "modal", class: { "is-active": _vm.isActive } },
+    [
       _c("div", { staticClass: "modal-background" }),
       _vm._v(" "),
       _c("div", { staticClass: "modal-card" }, [
@@ -14219,7 +14276,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Save changes")]
+            [_vm._v("Create")]
           ),
           _vm._v(" "),
           _c(
@@ -14236,8 +14293,8 @@ var render = function() {
           )
         ])
       ])
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
