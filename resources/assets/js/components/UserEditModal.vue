@@ -1,5 +1,5 @@
 <template>
-    <div class="modal is-active" style="text-align: left;" v-on:openModal="updateUser()">
+    <div class="modal" :class="{ 'is-active': isActive }" style="text-align: left;" v-on:openModal="updateUser()">
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
@@ -55,7 +55,18 @@
 <script>
     export default {
 
-        props: ['user'],
+        props: ['user', 'isActive', 'isSaved'],
+
+        data() {
+            return {
+                oldUser: {
+                    encoded_id: '',
+                    username: '',
+                    email: '',
+                    role_label: ''
+                }
+            };
+        },
 
         methods: {
             saveAndClose() {
@@ -66,11 +77,12 @@
                     role: this.user.role_label
                 })
                 .then(function (response) {
+                    self.$emit('saveAndClose');
                     self.$el.classList.remove('is-active');
                 });
             },
             close() {
-                this.$el.classList.remove('is-active');
+                this.$emit('close');
             }
         }
     }

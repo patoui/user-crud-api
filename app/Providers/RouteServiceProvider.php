@@ -27,7 +27,7 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
         Route::bind('user', function($value, $route) {
-            return Hashids::decode($value);
+            return data_get(Hashids::decode($value), '0');
         });
     }
 

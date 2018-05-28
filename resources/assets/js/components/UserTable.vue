@@ -10,7 +10,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr v-for="user in users" :key="user.encoded_id">
+            <tr v-for="user in dataUsers" :key="user.encoded_id">
                 <td>{{ user.username }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.role_label }}</td>
@@ -25,6 +25,7 @@
                 </td>
             </tr>
         </tbody>
+        <user-edit-modal :user="user" :isActive="isActive" v-on:saveAndClose="onSaveAndClose()" v-on:close="onClose()"></user-edit-modal>
     </table>
 </template>
 
@@ -35,15 +36,36 @@
 
         props: ['users'],
 
+        mounted() {
+            this.dataUsers = this.users;
+        },
+
+        data() {
+            return {
+                dataUsers: {},
+                oldUsers: {},
+                user: {
+                    encoded_id: '',
+                    username: '',
+                    email: '',
+                    role_label: ''
+                },
+                isActive: false
+            };
+        },
+
         methods: {
             openModal(user) {
-                var ComponentClass = Vue.extend(UserEditModal);
-                var instance = new ComponentClass({
-                    propsData: { user: user },
-                    parent: this
-                });
-                instance.$mount();
-                this.$refs.container.appendChild(instance.$el);
+                this.oldUsers = JSON.parse(JSON.stringify(this.dataUsers));
+                this.user = user;
+                this.isActive = ! this.isActive;
+            },
+            onSaveAndClose() {
+                this.isActive = false;
+            },
+            onClose() {
+                this.isActive = false;
+                this.dataUsers = JSON.parse(JSON.stringify(this.oldUsers));
             }
         }
     }

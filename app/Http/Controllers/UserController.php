@@ -15,6 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        Auth::loginUsingId(User::value('id'));
         return view('users.index')->with('users', User::get());
     }
 }

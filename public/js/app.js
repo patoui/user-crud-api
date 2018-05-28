@@ -13401,6 +13401,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 
 
@@ -13408,15 +13409,36 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     props: ['users'],
 
+    mounted: function mounted() {
+        this.dataUsers = this.users;
+    },
+    data: function data() {
+        return {
+            dataUsers: {},
+            oldUsers: {},
+            user: {
+                encoded_id: '',
+                username: '',
+                email: '',
+                role_label: ''
+            },
+            isActive: false
+        };
+    },
+
+
     methods: {
         openModal: function openModal(user) {
-            var ComponentClass = Vue.extend(__WEBPACK_IMPORTED_MODULE_0__UserEditModal_vue___default.a);
-            var instance = new ComponentClass({
-                propsData: { user: user },
-                parent: this
-            });
-            instance.$mount();
-            this.$refs.container.appendChild(instance.$el);
+            this.oldUsers = JSON.parse(JSON.stringify(this.dataUsers));
+            this.user = user;
+            this.isActive = !this.isActive;
+        },
+        onSaveAndClose: function onSaveAndClose() {
+            this.isActive = false;
+        },
+        onClose: function onClose() {
+            this.isActive = false;
+            this.dataUsers = JSON.parse(JSON.stringify(this.oldUsers));
         }
     }
 });
@@ -13484,7 +13506,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    props: ['user'],
+    props: ['user', 'isActive', 'isSaved'],
+
+    data: function data() {
+        return {
+            oldUser: {
+                encoded_id: '',
+                username: '',
+                email: '',
+                role_label: ''
+            }
+        };
+    },
+
 
     methods: {
         saveAndClose: function saveAndClose() {
@@ -13494,11 +13528,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 email: this.user.email,
                 role: this.user.role_label
             }).then(function (response) {
+                self.$emit('saveAndClose');
                 self.$el.classList.remove('is-active');
             });
         },
         close: function close() {
-            this.$el.classList.remove('is-active');
+            this.$emit('close');
         }
     }
 });
@@ -13514,7 +13549,8 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "modal is-active",
+      staticClass: "modal",
+      class: { "is-active": _vm.isActive },
       staticStyle: { "text-align": "left" },
       on: {
         openModal: function($event) {
@@ -13722,7 +13758,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "tbody",
-        _vm._l(_vm.users, function(user) {
+        _vm._l(_vm.dataUsers, function(user) {
           return _c("tr", { key: user.encoded_id }, [
             _c("td", [_vm._v(_vm._s(user.username))]),
             _vm._v(" "),
@@ -13753,8 +13789,21 @@ var render = function() {
             ])
           ])
         })
-      )
-    ]
+      ),
+      _vm._v(" "),
+      _c("user-edit-modal", {
+        attrs: { user: _vm.user, isActive: _vm.isActive },
+        on: {
+          saveAndClose: function($event) {
+            _vm.onSaveAndClose()
+          },
+          close: function($event) {
+            _vm.onClose()
+          }
+        }
+      })
+    ],
+    1
   )
 }
 var staticRenderFns = [
