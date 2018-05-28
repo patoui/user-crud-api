@@ -16,6 +16,9 @@
                             <div class="control">
                                 <input class="input" type="text" v-model="user.username">
                             </div>
+                            <div v-if="errors.hasOwnProperty('username')">
+                                <p v-for="error in errors.username" class="help is-danger">{{ error }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -28,6 +31,9 @@
                             <div class="control">
                                 <input class="input" type="text" v-model="user.email">
                             </div>
+                            <div v-if="errors.hasOwnProperty('email')">
+                                <p v-for="error in errors.email" class="help is-danger">{{ error }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -39,6 +45,9 @@
                         <div class="field">
                             <div class="control">
                                 <input class="input" type="text" v-model="user.role_label">
+                            </div>
+                            <div v-if="errors.hasOwnProperty('role')">
+                                <p v-for="error in errors.role" class="help is-danger">{{ error }}</p>
                             </div>
                         </div>
                     </div>
@@ -59,12 +68,7 @@
 
         data() {
             return {
-                oldUser: {
-                    encoded_id: '',
-                    username: '',
-                    email: '',
-                    role_label: ''
-                }
+                errors: {}
             };
         },
 
@@ -78,10 +82,13 @@
                 })
                 .then(function (response) {
                     self.$emit('save');
+                })
+                .catch(function (error) {
+                    self.errors = error.response.data.errors;
                 });
             },
             close() {
-                this.$emit('close');
+                this.$emit('closeUpdate');
             }
         }
     }

@@ -13715,6 +13715,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
@@ -13722,12 +13731,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     data: function data() {
         return {
-            oldUser: {
-                encoded_id: '',
-                username: '',
-                email: '',
-                role_label: ''
-            }
+            errors: {}
         };
     },
 
@@ -13741,10 +13745,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 role: this.user.role_label
             }).then(function (response) {
                 self.$emit('save');
+            }).catch(function (error) {
+                self.errors = error.response.data.errors;
             });
         },
         close: function close() {
-            this.$emit('close');
+            this.$emit('closeUpdate');
         }
     }
 });
@@ -13817,7 +13823,18 @@ var render = function() {
                       }
                     }
                   })
-                ])
+                ]),
+                _vm._v(" "),
+                _vm.errors.hasOwnProperty("username")
+                  ? _c(
+                      "div",
+                      _vm._l(_vm.errors.username, function(error) {
+                        return _c("p", { staticClass: "help is-danger" }, [
+                          _vm._v(_vm._s(error))
+                        ])
+                      })
+                    )
+                  : _vm._e()
               ])
             ])
           ]),
@@ -13849,7 +13866,18 @@ var render = function() {
                       }
                     }
                   })
-                ])
+                ]),
+                _vm._v(" "),
+                _vm.errors.hasOwnProperty("email")
+                  ? _c(
+                      "div",
+                      _vm._l(_vm.errors.email, function(error) {
+                        return _c("p", { staticClass: "help is-danger" }, [
+                          _vm._v(_vm._s(error))
+                        ])
+                      })
+                    )
+                  : _vm._e()
               ])
             ])
           ]),
@@ -13881,7 +13909,18 @@ var render = function() {
                       }
                     }
                   })
-                ])
+                ]),
+                _vm._v(" "),
+                _vm.errors.hasOwnProperty("role")
+                  ? _c(
+                      "div",
+                      _vm._l(_vm.errors.role, function(error) {
+                        return _c("p", { staticClass: "help is-danger" }, [
+                          _vm._v(_vm._s(error))
+                        ])
+                      })
+                    )
+                  : _vm._e()
               ])
             ])
           ])
