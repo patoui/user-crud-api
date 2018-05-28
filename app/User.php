@@ -22,6 +22,10 @@ class User extends Authenticatable
         'email',
     ];
 
+    protected $appends = ['short_updated_at', 'role_label', 'encoded_id'];
+
+    protected $hidden = ['id', 'user_roles_id', 'role'];
+
     /**
      * Override getRouteKey to display encoded id
      *
@@ -53,7 +57,7 @@ class User extends Authenticatable
      */
     public function getRoleLabelAttribute()
     {
-        return $this->role->label;
+        return data_get($this, 'role.label');
     }
 
     /**
@@ -64,5 +68,15 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class, 'user_roles_id');
+    }
+
+    /**
+     * Encoded id
+     *
+     * @return string
+     */
+    public function getEncodedIdAttribute()
+    {
+        return $this->getRouteKey();
     }
 }

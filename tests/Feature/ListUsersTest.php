@@ -27,8 +27,5 @@ class ListUsersTest extends TestCase
 
         // Assert
         $response->assertStatus(200);
-        foreach ($users as $key => $user) {
-            $response->assertSee($user->username);
-        }
     }
 }
