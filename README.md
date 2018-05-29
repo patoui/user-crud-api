@@ -74,6 +74,13 @@ Visit the provided IP address from your terminal (usually [127.0.0.1:8000](http:
 
 **Action:** POST
 
+**Required Headers:**
+
+| Key | Value |
+|----|----|
+| Accept | application/json |
+| Content-Type | application/json |
+
 **Arguments:**
 
 | Key | Type | Rules | Description |
@@ -163,6 +170,13 @@ Visit the provided IP address from your terminal (usually [127.0.0.1:8000](http:
 **URL:** /api/users/{id}
 
 **Action:** PUT
+
+**Required Headers:**
+
+| Key | Value |
+|----|----|
+| Accept | application/json |
+| Content-Type | application/json |
 
 **Parameters**
 
