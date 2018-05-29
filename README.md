@@ -36,4 +36,4 @@ To serve the application run
 php artisan serve
 ```
 
-Visit the provided ip from your terminal (usually [127.0.0.1:8000](http://127.0.0.1:8000))
+Visit the provided IP address from your terminal (usually [127.0.0.1:8000](http://127.0.0.1:8000))
