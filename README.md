@@ -13,6 +13,12 @@ Clone the repository
 git clone https://github.com/patoui/user-crud-api.git
 ```
 
+Change to the project directory
+
+```bash
+cd user-crud-api
+```
+
 Run composer
 
 ```bash
