@@ -19,6 +19,7 @@ Vue.component('user-table', require('./components/UserTable.vue'));
 Vue.component('user-create-modal', require('./components/UserCreateModal.vue'));
 Vue.component('user-delete-modal', require('./components/UserDeleteModal.vue'));
 Vue.component('user-update-modal', require('./components/UserUpdateModal.vue'));
+Vue.component('user-read-modal', require('./components/UserReadModal.vue'));
 
 const app = new Vue({
     el: '#app'

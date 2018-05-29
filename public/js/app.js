@@ -1105,6 +1105,7 @@ Vue.component('user-table', __webpack_require__(36));
 Vue.component('user-create-modal', __webpack_require__(55));
 Vue.component('user-delete-modal', __webpack_require__(58));
 Vue.component('user-update-modal', __webpack_require__(52));
+Vue.component('user-read-modal', __webpack_require__(61));
 
 var app = new Vue({
   el: '#app'
@@ -13331,6 +13332,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__UserDeleteModal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__UserDeleteModal_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__UserUpdateModal_vue__ = __webpack_require__(52);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__UserUpdateModal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__UserUpdateModal_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__UserReadModal_vue__ = __webpack_require__(61);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__UserReadModal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3__UserReadModal_vue__);
 //
 //
 //
@@ -13378,6 +13381,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+
 
 
 
@@ -13406,7 +13414,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             },
             isCreateActive: false,
             isDeleteActive: false,
-            isUpdateActive: false
+            isUpdateActive: false,
+            isReadActive: false
         };
     },
 
@@ -13415,35 +13424,45 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         openCreate: function openCreate() {
             this.isCreateActive = true;
         },
+        openDelete: function openDelete(user) {
+            this.user = user;
+            this.isDeleteActive = true;
+        },
         openUpdate: function openUpdate(user) {
             this.oldUsers = JSON.parse(JSON.stringify(this.dataUsers));
             this.user = user;
             this.isUpdateActive = true;
         },
-        openDelete: function openDelete(user) {
+        openRead: function openRead(user) {
             this.user = user;
-            this.isDeleteActive = true;
+            this.isReadActive = true;
         },
         onCreate: function onCreate() {
             this.isCreateActive = false;
             this.list();
         },
-        onUpdate: function onUpdate() {
-            this.isUpdateActive = false;
-        },
         onDelete: function onDelete() {
             this.isDeleteActive = false;
             this.list();
         },
+        onUpdate: function onUpdate() {
+            this.isUpdateActive = false;
+        },
+        onRead: function onRead() {
+            this.isUpdateActive = false;
+        },
         onCloseCreate: function onCloseCreate() {
             this.isCreateActive = false;
+        },
+        onCloseDelete: function onCloseDelete() {
+            this.isUpdateActive = false;
         },
         onCloseUpdate: function onCloseUpdate() {
             this.isUpdateActive = false;
             this.dataUsers = JSON.parse(JSON.stringify(this.oldUsers));
         },
-        onCloseDelete: function onCloseDelete() {
-            this.isUpdateActive = false;
+        onCloseRead: function onCloseRead() {
+            this.isReadActive = false;
         },
         list: function list() {
             var self = this;
@@ -13548,6 +13567,20 @@ var render = function() {
                           _c(
                             "span",
                             {
+                              staticClass: "icon",
+                              staticStyle: { cursor: "pointer" },
+                              on: {
+                                click: function($event) {
+                                  _vm.openRead(user)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fa fa-eye fa-lg" })]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            {
                               staticClass: "icon has-text-info",
                               staticStyle: { cursor: "pointer" },
                               on: {
@@ -13601,6 +13634,15 @@ var render = function() {
                       },
                       closeUpdate: function($event) {
                         _vm.onCloseUpdate()
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("user-read-modal", {
+                    attrs: { user: _vm.user, isActive: _vm.isReadActive },
+                    on: {
+                      closeRead: function($event) {
+                        _vm.onCloseRead()
                       }
                     }
                   })
@@ -14600,6 +14642,310 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-6d9de2e0", module.exports)
+  }
+}
+
+/***/ }),
+/* 61 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(9)
+/* script */
+var __vue_script__ = __webpack_require__(62)
+/* template */
+var __vue_template__ = __webpack_require__(63)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/UserReadModal.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-34024885", Component.options)
+  } else {
+    hotAPI.reload("data-v-34024885", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 62 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: ['user', 'isActive'],
+
+    methods: {
+        close: function close() {
+            this.$emit('closeRead');
+        }
+    }
+});
+
+/***/ }),
+/* 63 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal",
+      class: { "is-active": _vm.isActive },
+      staticStyle: { "text-align": "left" }
+    },
+    [
+      _c("div", { staticClass: "modal-background" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "modal-card" }, [
+        _c("header", { staticClass: "modal-card-head" }, [
+          _c("p", { staticClass: "modal-card-title" }, [
+            _vm._v("Reading User: " + _vm._s(_vm.user.username))
+          ]),
+          _vm._v(" "),
+          _c("button", {
+            staticClass: "delete",
+            attrs: { "aria-label": "close" },
+            on: {
+              click: function($event) {
+                _vm.close()
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("section", { staticClass: "modal-card-body" }, [
+          _c("div", { staticClass: "field is-horizontal" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "field-body" }, [
+              _c("div", { staticClass: "field" }, [
+                _c("div", { staticClass: "control" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.user.username,
+                        expression: "user.username"
+                      }
+                    ],
+                    staticClass: "input",
+                    attrs: { type: "text", disabled: "" },
+                    domProps: { value: _vm.user.username },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.user, "username", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "field is-horizontal" }, [
+            _vm._m(1),
+            _vm._v(" "),
+            _c("div", { staticClass: "field-body" }, [
+              _c("div", { staticClass: "field" }, [
+                _c("div", { staticClass: "control" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.user.email,
+                        expression: "user.email"
+                      }
+                    ],
+                    staticClass: "input",
+                    attrs: { type: "text", disabled: "" },
+                    domProps: { value: _vm.user.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.user, "email", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "field is-horizontal" }, [
+            _vm._m(2),
+            _vm._v(" "),
+            _c("div", { staticClass: "field-body" }, [
+              _c("div", { staticClass: "field" }, [
+                _c("div", { staticClass: "control" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.user.role_label,
+                        expression: "user.role_label"
+                      }
+                    ],
+                    staticClass: "input",
+                    attrs: { type: "text", disabled: "" },
+                    domProps: { value: _vm.user.role_label },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.user, "role_label", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("footer", { staticClass: "modal-card-foot" }, [
+          _c(
+            "button",
+            {
+              staticClass: "button",
+              on: {
+                click: function($event) {
+                  _vm.close()
+                }
+              }
+            },
+            [_vm._v("Close")]
+          )
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field-label is-normal" }, [
+      _c("label", { staticClass: "label" }, [_vm._v("Username")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field-label is-normal" }, [
+      _c("label", { staticClass: "label" }, [_vm._v("Email")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "field-label is-normal" }, [
+      _c("label", { staticClass: "label" }, [_vm._v("Role")])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-34024885", module.exports)
   }
 }
 
