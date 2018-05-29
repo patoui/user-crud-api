@@ -1102,8 +1102,9 @@ window.Vue = __webpack_require__(33);
  */
 
 Vue.component('user-table', __webpack_require__(36));
-Vue.component('user-update-modal', __webpack_require__(52));
 Vue.component('user-create-modal', __webpack_require__(55));
+Vue.component('user-delete-modal', __webpack_require__(58));
+Vue.component('user-update-modal', __webpack_require__(52));
 
 var app = new Vue({
   el: '#app'
@@ -13326,8 +13327,10 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__UserCreateModal_vue__ = __webpack_require__(55);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__UserCreateModal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__UserCreateModal_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__UserUpdateModal_vue__ = __webpack_require__(52);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__UserUpdateModal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__UserUpdateModal_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__UserDeleteModal_vue__ = __webpack_require__(58);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__UserDeleteModal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__UserDeleteModal_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__UserUpdateModal_vue__ = __webpack_require__(52);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__UserUpdateModal_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2__UserUpdateModal_vue__);
 //
 //
 //
@@ -13374,6 +13377,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+
 
 
 
@@ -13383,7 +13388,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     props: ['users'],
 
     mounted: function mounted() {
-        this.dataUsers = this.users;
+        if (this.users) {
+            this.dataUsers = this.users;
+        } else {
+            this.list();
+        }
     },
     data: function data() {
         return {
@@ -13396,7 +13405,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 role_label: ''
             },
             isCreateActive: false,
-            isEditActive: false
+            isDeleteActive: false,
+            isUpdateActive: false
         };
     },
 
@@ -13405,23 +13415,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         openCreate: function openCreate() {
             this.isCreateActive = true;
         },
-        openEdit: function openEdit(user) {
+        openUpdate: function openUpdate(user) {
             this.oldUsers = JSON.parse(JSON.stringify(this.dataUsers));
             this.user = user;
-            this.isEditActive = !this.isEditActive;
+            this.isUpdateActive = true;
         },
-        onStore: function onStore() {
+        openDelete: function openDelete(user) {
+            this.user = user;
+            this.isDeleteActive = true;
+        },
+        onCreate: function onCreate() {
             this.isCreateActive = false;
+            this.list();
         },
-        onSave: function onSave() {
-            this.isEditActive = false;
+        onUpdate: function onUpdate() {
+            this.isUpdateActive = false;
+        },
+        onDelete: function onDelete() {
+            this.isDeleteActive = false;
+            this.list();
         },
         onCloseCreate: function onCloseCreate() {
             this.isCreateActive = false;
         },
         onCloseUpdate: function onCloseUpdate() {
-            this.isEditActive = false;
+            this.isUpdateActive = false;
             this.dataUsers = JSON.parse(JSON.stringify(this.oldUsers));
+        },
+        onCloseDelete: function onCloseDelete() {
+            this.isUpdateActive = false;
+        },
+        list: function list() {
+            var self = this;
+            axios.get('/api/users').then(function (response) {
+                self.dataUsers = response.data.data;
+            }).catch(function (error) {
+                self.errors = error.response.data.errors;
+            });
         }
     }
 });
@@ -13436,117 +13466,153 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "section" }, [
-    _c(
-      "div",
-      { staticClass: "columns" },
-      [
-        _c(
-          "div",
-          { staticClass: "column", staticStyle: { "text-align": "right" } },
-          [
-            _c(
-              "button",
-              {
-                staticClass: "button is-success",
-                attrs: { type: "button" },
-                on: {
-                  click: function($event) {
-                    _vm.openCreate()
-                  }
-                }
-              },
-              [
-                _c("i", { staticClass: "fa fa-user-plus" }),
-                _vm._v(" Create User")
-              ]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("user-create-modal", {
-          attrs: { isActive: _vm.isCreateActive },
-          on: {
-            store: function($event) {
-              _vm.onStore()
-            },
-            closeCreate: function($event) {
-              _vm.onCloseCreate()
-            }
-          }
-        })
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "columns" }, [
+  return _c(
+    "div",
+    { staticClass: "section", staticStyle: { "overflow-x": "auto" } },
+    [
       _c(
         "div",
-        { staticClass: "column", staticStyle: { "text-align": "right" } },
+        { staticClass: "columns", staticStyle: { "min-width": "780px" } },
         [
           _c(
-            "table",
-            {
-              ref: "container",
-              staticClass: "table",
-              staticStyle: { width: "100%" }
-            },
+            "div",
+            { staticClass: "column", staticStyle: { "text-align": "right" } },
             [
-              _vm._m(0),
-              _vm._v(" "),
               _c(
-                "tbody",
-                _vm._l(_vm.dataUsers, function(user) {
-                  return _c("tr", { key: user.encoded_id }, [
-                    _c("td", [_vm._v(_vm._s(user.username))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(user.email))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(user.role_label))]),
-                    _vm._v(" "),
-                    _c("td", { staticStyle: { "text-align": "right" } }, [
-                      _vm._v(_vm._s(user.short_updated_at))
-                    ]),
-                    _vm._v(" "),
-                    _c("td", { staticStyle: { "text-align": "right" } }, [
-                      _c(
-                        "span",
-                        {
-                          staticClass: "icon has-text-info",
-                          staticStyle: { cursor: "pointer" },
-                          on: {
-                            click: function($event) {
-                              _vm.openEdit(user)
-                            }
-                          }
-                        },
-                        [_c("i", { staticClass: "fa fa-pencil-square fa-lg" })]
-                      ),
-                      _vm._v(" "),
-                      _vm._m(1, true)
-                    ])
-                  ])
-                })
-              ),
-              _vm._v(" "),
-              _c("user-update-modal", {
-                attrs: { user: _vm.user, isActive: _vm.isEditActive },
-                on: {
-                  save: function($event) {
-                    _vm.onSave()
-                  },
-                  closeUpdate: function($event) {
-                    _vm.onCloseUpdate()
+                "button",
+                {
+                  staticClass: "button is-success",
+                  attrs: { type: "button" },
+                  on: {
+                    click: function($event) {
+                      _vm.openCreate()
+                    }
                   }
-                }
-              })
-            ],
-            1
+                },
+                [
+                  _c("i", { staticClass: "fa fa-user-plus" }),
+                  _vm._v(" Create User")
+                ]
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("user-create-modal", {
+            attrs: { isActive: _vm.isCreateActive },
+            on: {
+              store: function($event) {
+                _vm.onCreate()
+              },
+              closeCreate: function($event) {
+                _vm.onCloseCreate()
+              }
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "columns", staticStyle: { "min-width": "780px" } },
+        [
+          _c(
+            "div",
+            { staticClass: "column", staticStyle: { "text-align": "right" } },
+            [
+              _c(
+                "table",
+                {
+                  ref: "container",
+                  staticClass: "table",
+                  staticStyle: { width: "100%" }
+                },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.dataUsers, function(user) {
+                      return _c("tr", { key: user.encoded_id }, [
+                        _c("td", [_vm._v(_vm._s(user.username))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(user.email))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(user.role_label))]),
+                        _vm._v(" "),
+                        _c("td", { staticStyle: { "text-align": "right" } }, [
+                          _vm._v(_vm._s(user.short_updated_at))
+                        ]),
+                        _vm._v(" "),
+                        _c("td", { staticStyle: { "text-align": "right" } }, [
+                          _c(
+                            "span",
+                            {
+                              staticClass: "icon has-text-info",
+                              staticStyle: { cursor: "pointer" },
+                              on: {
+                                click: function($event) {
+                                  _vm.openUpdate(user)
+                                }
+                              }
+                            },
+                            [
+                              _c("i", {
+                                staticClass: "fa fa-pencil-square fa-lg"
+                              })
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            {
+                              staticClass: "icon has-text-danger",
+                              staticStyle: { cursor: "pointer" },
+                              on: {
+                                click: function($event) {
+                                  _vm.openDelete(user)
+                                }
+                              }
+                            },
+                            [_c("i", { staticClass: "fa fa-trash fa-lg" })]
+                          )
+                        ])
+                      ])
+                    })
+                  ),
+                  _vm._v(" "),
+                  _c("user-delete-modal", {
+                    attrs: { user: _vm.user, isActive: _vm.isDeleteActive },
+                    on: {
+                      deleteUser: function($event) {
+                        _vm.onDelete()
+                      },
+                      closeDelete: function($event) {
+                        _vm.onCloseDelete()
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("user-update-modal", {
+                    attrs: { user: _vm.user, isActive: _vm.isUpdateActive },
+                    on: {
+                      save: function($event) {
+                        _vm.onUpdate()
+                      },
+                      closeUpdate: function($event) {
+                        _vm.onCloseUpdate()
+                      }
+                    }
+                  })
+                ],
+                1
+              )
+            ]
           )
         ]
       )
-    ])
-  ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
@@ -13568,19 +13634,6 @@ var staticRenderFns = [
         _c("th", { staticStyle: { "text-align": "right" } }, [_vm._v("Tools")])
       ])
     ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "span",
-      {
-        staticClass: "icon has-text-danger",
-        staticStyle: { cursor: "pointer" }
-      },
-      [_c("i", { staticClass: "fa fa-trash fa-lg" })]
-    )
   }
 ]
 render._withStripped = true
@@ -13768,12 +13821,7 @@ var render = function() {
     {
       staticClass: "modal",
       class: { "is-active": _vm.isActive },
-      staticStyle: { "text-align": "left" },
-      on: {
-        openModal: function($event) {
-          _vm.updateUser()
-        }
-      }
+      staticStyle: { "text-align": "left" }
     },
     [
       _c("div", { staticClass: "modal-background" }),
@@ -14367,6 +14415,191 @@ if (false) {
   module.hot.accept()
   if (module.hot.data) {
     require("vue-hot-reload-api")      .rerender("data-v-433d1e5f", module.exports)
+  }
+}
+
+/***/ }),
+/* 58 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(9)
+/* script */
+var __vue_script__ = __webpack_require__(59)
+/* template */
+var __vue_template__ = __webpack_require__(60)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/UserDeleteModal.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-6d9de2e0", Component.options)
+  } else {
+    hotAPI.reload("data-v-6d9de2e0", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 59 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+
+    props: ['user', 'isActive'],
+
+    data: function data() {
+        return {
+            errors: {}
+        };
+    },
+
+
+    methods: {
+        // couldn't use "delete" as the function name, it's a reserved word
+        deleteUser: function deleteUser() {
+            var self = this;
+            axios.delete('/api/users/' + this.user.encoded_id).then(function (response) {
+                self.$emit('deleteUser');
+            }).catch(function (error) {
+                self.errors = error.response.data.errors;
+            });
+        },
+        close: function close() {
+            this.$emit('closeDelete');
+        }
+    }
+});
+
+/***/ }),
+/* 60 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    {
+      staticClass: "modal",
+      class: { "is-active": _vm.isActive },
+      staticStyle: { "text-align": "left" }
+    },
+    [
+      _c("div", { staticClass: "modal-background" }),
+      _vm._v(" "),
+      _c("div", { staticClass: "modal-card" }, [
+        _c("header", { staticClass: "modal-card-head" }, [
+          _c("p", { staticClass: "modal-card-title" }, [
+            _vm._v("Deleting User: " + _vm._s(_vm.user.username))
+          ]),
+          _vm._v(" "),
+          _c("button", {
+            staticClass: "delete",
+            attrs: { "aria-label": "close" },
+            on: {
+              click: function($event) {
+                _vm.close()
+              }
+            }
+          })
+        ]),
+        _vm._v(" "),
+        _c("section", { staticClass: "modal-card-body" }, [
+          _c("h1", [
+            _vm._v(
+              "Are you sure you want to delete user: " +
+                _vm._s(_vm.user.username)
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("footer", { staticClass: "modal-card-foot" }, [
+          _c(
+            "button",
+            {
+              staticClass: "button is-danger",
+              on: {
+                click: function($event) {
+                  _vm.deleteUser()
+                }
+              }
+            },
+            [_vm._v("Delete")]
+          ),
+          _vm._v(" "),
+          _c(
+            "button",
+            {
+              staticClass: "button",
+              on: {
+                click: function($event) {
+                  _vm.close()
+                }
+              }
+            },
+            [_vm._v("Cancel")]
+          )
+        ])
+      ])
+    ]
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-6d9de2e0", module.exports)
   }
 }
 

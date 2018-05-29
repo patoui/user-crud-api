@@ -1,5 +1,5 @@
 <template>
-    <div class="modal" :class="{ 'is-active': isActive }" style="text-align: left;" v-on:openModal="updateUser()">
+    <div class="modal" :class="{ 'is-active': isActive }" style="text-align: left;">
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">

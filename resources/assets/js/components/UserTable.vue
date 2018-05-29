@@ -1,14 +1,14 @@
 <template>
-    <div class="section">
+    <div class="section" style="overflow-x: auto;">
 
-        <div class="columns">
+        <div class="columns" style="min-width: 780px;">
             <div class="column" style="text-align: right;">
                 <button type="button" class="button is-success" @click="openCreate()"><i class="fa fa-user-plus"></i>&nbsp;Create User</button>
             </div>
-            <user-create-modal :isActive="isCreateActive" v-on:store="onStore()" v-on:closeCreate="onCloseCreate()"></user-create-modal>
+            <user-create-modal :isActive="isCreateActive" v-on:store="onCreate()" v-on:closeCreate="onCloseCreate()"></user-create-modal>
         </div>
 
-        <div class="columns">
+        <div class="columns" style="min-width: 780px;">
             <div class="column" style="text-align: right;">
                 <table class="table" style="width: 100%;" ref="container">
                     <thead>
@@ -27,16 +27,17 @@
                             <td>{{ user.role_label }}</td>
                             <td style="text-align: right;">{{ user.short_updated_at }}</td>
                             <td style="text-align: right;">
-                                <span @click="openEdit(user)" class="icon has-text-info" style="cursor: pointer;">
+                                <span @click="openUpdate(user)" class="icon has-text-info" style="cursor: pointer;">
                                     <i class="fa fa-pencil-square fa-lg"></i>
                                 </span>
-                                <span class="icon has-text-danger" style="cursor: pointer;">
+                                <span @click="openDelete(user)" class="icon has-text-danger" style="cursor: pointer;">
                                     <i class="fa fa-trash fa-lg"></i>
                                 </span>
                             </td>
                         </tr>
                     </tbody>
-                    <user-update-modal :user="user" :isActive="isEditActive" v-on:save="onSave()" v-on:closeUpdate="onCloseUpdate()"></user-update-modal>
+                    <user-delete-modal :user="user" :isActive="isDeleteActive" v-on:deleteUser="onDelete()" v-on:closeDelete="onCloseDelete()"></user-delete-modal>
+                    <user-update-modal :user="user" :isActive="isUpdateActive" v-on:save="onUpdate()" v-on:closeUpdate="onCloseUpdate()"></user-update-modal>
                 </table>
             </div>
         </div>
@@ -46,6 +47,7 @@
 
 <script>
     import UserCreateModal from './UserCreateModal.vue';
+    import UserDeleteModal from './UserDeleteModal.vue';
     import UserUpdateModal from './UserUpdateModal.vue';
 
     export default {
@@ -53,7 +55,11 @@
         props: ['users'],
 
         mounted() {
-            this.dataUsers = this.users;
+            if (this.users) {
+                this.dataUsers = this.users;
+            } else {
+                this.list();
+            }
         },
 
         data() {
@@ -67,7 +73,8 @@
                     role_label: ''
                 },
                 isCreateActive: false,
-                isEditActive: false
+                isDeleteActive: false,
+                isUpdateActive: false
             };
         },
 
@@ -75,23 +82,45 @@
             openCreate() {
                 this.isCreateActive = true;
             },
-            openEdit(user) {
+            openUpdate(user) {
                 this.oldUsers = JSON.parse(JSON.stringify(this.dataUsers));
                 this.user = user;
-                this.isEditActive = ! this.isEditActive;
+                this.isUpdateActive = true;
             },
-            onStore() {
+            openDelete(user) {
+                this.user = user;
+                this.isDeleteActive = true;
+            },
+            onCreate() {
                 this.isCreateActive = false;
+                this.list();
             },
-            onSave() {
-                this.isEditActive = false;
+            onUpdate() {
+                this.isUpdateActive = false;
+            },
+            onDelete() {
+                this.isDeleteActive = false;
+                this.list();
             },
             onCloseCreate() {
                 this.isCreateActive = false;
             },
             onCloseUpdate() {
-                this.isEditActive = false;
+                this.isUpdateActive = false;
                 this.dataUsers = JSON.parse(JSON.stringify(this.oldUsers));
+            },
+            onCloseDelete() {
+                this.isUpdateActive = false;
+            },
+            list() {
+                var self = this;
+                axios.get('/api/users')
+                    .then(function (response) {
+                        self.dataUsers = response.data.data;
+                    })
+                    .catch(function (error) {
+                        self.errors = error.response.data.errors;
+                    });
             }
         }
     }
