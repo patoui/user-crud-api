@@ -13467,7 +13467,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         list: function list() {
             var self = this;
             axios.get('/api/users').then(function (response) {
-                self.dataUsers = response.data.data;
+                self.dataUsers = response.data;
             }).catch(function (error) {
                 self.errors = error.response.data.errors;
             });
