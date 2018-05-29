@@ -8,6 +8,7 @@
 * MySQL
 * PHP ^7.1.3
 * Composer
+* Additional [Laravel Server Requirements](https://laravel.com/docs/5.6/installation#server-requirements)
 
 # How to install
 
