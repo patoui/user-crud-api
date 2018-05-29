@@ -44,6 +44,8 @@ Visit the provided IP address from your terminal (usually [127.0.0.1:8000](http:
 
 ## Create User
 
+### Request
+
 **URL:** /api/users
 
 **Action:** POST
@@ -56,4 +58,70 @@ Visit the provided IP address from your terminal (usually [127.0.0.1:8000](http:
 | email | string | A valid email address following (valid per [RFC 822](https://www.ietf.org/rfc/rfc822.txt)) |
 | role | string | Must be one of the following: Admin, Publisher, Public User |
 
+### Response
 
+**Status:** 201
+
+**Content-Type:** application/json
+
+| Key | Type | Description |
+|----|----|----|
+| id | string | Unique string to identify a user |
+| username | string | A string used to label a user |
+| email | string | A valid email address following (valid per [RFC 822](https://www.ietf.org/rfc/rfc822.txt)) |
+| role | string | Must be one of the following: Admin, Publisher, Public User |
+| created_at | string | UTC datetime string (format example: 2017-12-22 22:59:59) |
+| updated_at | string | UTC datetime string (format example: 2017-12-22 22:59:59) |
+| short_updated_at | string | America/Toronto datetime string (format example: December 22nd 10:59 AM) |
+
+**Sample Response**
+
+```json
+{
+    "id": "ypazj",
+    "username": "New Admin",
+    "email": "new-admin@test.com",
+    "role": "Admin",
+    "created_at": "2017-12-22 22:59:59",
+    "updated_at": "2017-12-22 22:59:59",
+    "short_updated_at": "December 22nd 10:59 AM"
+}
+```
+
+## Read User
+
+### Request
+
+**URL:** /api/users/{id}
+
+**Action:** GET
+
+### Response
+
+**Status:** 200
+
+**Content-Type:** application/json
+
+| Key | Type | Description |
+|----|----|----|
+| id | string | Unique string to identify a user |
+| username | string | A string used to label a user |
+| email | string | A valid email address following (valid per [RFC 822](https://www.ietf.org/rfc/rfc822.txt)) |
+| role | string | Must be one of the following: Admin, Publisher, Public User |
+| created_at | string | UTC datetime string (format example: 2017-12-22 22:59:59) |
+| updated_at | string | UTC datetime string (format example: 2017-12-22 22:59:59) |
+| short_updated_at | string | America/Toronto datetime string (format example: December 22nd 10:59 AM) |
+
+**Sample Response**
+
+```json
+{
+    "id": "ypazj",
+    "username": "New Admin",
+    "email": "new-admin@test.com",
+    "role": "Admin",
+    "created_at": "2017-12-22 22:59:59",
+    "updated_at": "2017-12-22 22:59:59",
+    "short_updated_at": "December 22nd 10:59 AM"
+}
+```
