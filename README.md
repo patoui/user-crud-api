@@ -67,9 +67,9 @@ Visit the provided IP address from your terminal (usually [127.0.0.1:8000](http:
 | Key | Type | Description |
 |----|----|----|
 | id | string | Unique string to identify a user |
-| username | string | A string used to label a user |
-| email | string | A valid email address following (valid per [RFC 822](https://www.ietf.org/rfc/rfc822.txt)) |
-| role | string | Must be one of the following: Admin, Publisher, Public User |
+| username | string | The user's name label |
+| email | string | The user's email address |
+| role | string | The user's role |
 | created_at | string | UTC datetime string (format example: 2017-12-22 22:59:59) |
 | updated_at | string | UTC datetime string (format example: 2017-12-22 22:59:59) |
 | short_updated_at | string | America/Toronto datetime string (format example: December 22nd 10:59 AM) |
@@ -111,9 +111,9 @@ Visit the provided IP address from your terminal (usually [127.0.0.1:8000](http:
 | Key | Type | Description |
 |----|----|----|
 | id | string | Unique string to identify a user |
-| username | string | A string used to label a user |
-| email | string | A valid email address following (valid per [RFC 822](https://www.ietf.org/rfc/rfc822.txt)) |
-| role | string | Must be one of the following: Admin, Publisher, Public User |
+| username | string | The user's name label |
+| email | string | The user's email address |
+| role | string | The user's role |
 | created_at | string | UTC datetime string (format example: 2017-12-22 22:59:59) |
 | updated_at | string | UTC datetime string (format example: 2017-12-22 22:59:59) |
 | short_updated_at | string | America/Toronto datetime string (format example: December 22nd 10:59 AM) |
@@ -163,9 +163,9 @@ Visit the provided IP address from your terminal (usually [127.0.0.1:8000](http:
 | Key | Type | Description |
 |----|----|----|
 | id | string | Unique string to identify a user |
-| username | string | A string used to label a user |
-| email | string | A valid email address following (valid per [RFC 822](https://www.ietf.org/rfc/rfc822.txt)) |
-| role | string | Must be one of the following: Admin, Publisher, Public User |
+| username | string | The user's name label |
+| email | string | The user's email address |
+| role | string | The user's role |
 | created_at | string | UTC datetime string (format example: 2017-12-22 22:59:59) |
 | updated_at | string | UTC datetime string (format example: 2017-12-22 22:59:59) |
 | short_updated_at | string | America/Toronto datetime string (format example: December 22nd 10:59 AM) |
@@ -208,3 +208,53 @@ Visit the provided IP address from your terminal (usually [127.0.0.1:8000](http:
 
 ```json
 ```
+
+## List Users
+
+### Request
+
+**URL:** /api/users
+
+**Action:** GET
+
+### Response
+
+**Status:** 200
+
+**Content-Type:** application/json
+
+| Key | Type | Description |
+|----|----|----|
+| id | string | Unique string to identify a user |
+| username | string | The user's name label |
+| email | string | The user's email address |
+| role | string | The user's role |
+| created_at | string | UTC datetime string (format example: 2017-12-22 22:59:59) |
+| updated_at | string | UTC datetime string (format example: 2017-12-22 22:59:59) |
+| short_updated_at | string | America/Toronto datetime string (format example: December 22nd 10:59 AM) |
+
+**Sample Response**
+
+```json
+[
+    {
+        "id": "ypazj",
+        "username": "New Admin",
+        "email": "new-admin@test.com",
+        "role": "Admin",
+        "created_at": "2017-12-22 22:59:59",
+        "updated_at": "2017-12-22 22:59:59",
+        "short_updated_at": "December 22nd 10:59 AM"
+    },
+    {
+        "id": "npdvp",
+        "username": "New Publisher",
+        "email": "new-publisher@test.com",
+        "role": "Publisher",
+        "created_at": "2017-12-22 23:00:00",
+        "updated_at": "2017-12-22 23:00:00",
+        "short_updated_at": "December 22nd 11:00 AM"
+    }
+]
+```
+
