@@ -12,6 +12,12 @@ Clone the repository, then run composer
 composer install
 ```
 
+To verify build integrity run the tests
+
+```bash
+vendor/bin/phpunit
+```
+
 Once composer has finished, run artisan commands to migrate and seed the database
 
 ```bash
@@ -30,4 +36,4 @@ To serve the application run
 php artisan serve
 ```
 
-Visit the provided ip from your terminal (usually 127.0.0.1:8000)
+Visit the provided ip from your terminal (usually [127.0.0.1:8000](http://127.0.0.1:8000))
