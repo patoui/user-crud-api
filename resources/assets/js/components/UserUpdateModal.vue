@@ -80,7 +80,7 @@
         methods: {
             save() {
                 var self = this;
-                axios.put('/api/users/' + this.user.encoded_id, {
+                axios.put('/api/users/' + this.user.id, {
                     username: this.user.username,
                     email: this.user.email,
                     role: this.user.role

@@ -82,7 +82,7 @@ class User extends Authenticatable
     public function toArray()
     {
         return [
-            'encoded_id' => $this->encoded_id,
+            'id' => $this->encoded_id,
             'username' => $this->username,
             'email' => $this->email,
             'role' => $this->role_label,
