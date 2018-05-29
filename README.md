@@ -68,6 +68,8 @@ php artisan serve
 
 Visit the provided IP address from your terminal (usually [127.0.0.1:8000](http://127.0.0.1:8000))
 
+*If you get an error that says "Missing BC Math or GMP extension" make sure one of them is enabled in your php.ini*
+
 # API Documentation
 
 ## Create User
