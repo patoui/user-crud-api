@@ -32,7 +32,7 @@ class DeleteUserApiTest extends TestCase
         $response = $this->deleteJson("/api/users/{$readUser->getRouteKey()}");
 
         // Assert
-        $response->assertStatus(200);
+        $response->assertStatus(204);
         $this->assertEquals(
             0,
             DB::table('users')->where('id', $readUser->id)->count()

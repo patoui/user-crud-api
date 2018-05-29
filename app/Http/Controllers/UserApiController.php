@@ -101,6 +101,6 @@ class UserApiController extends Controller
 
         $user->delete();
 
-        return [];
+        return response()->json([], 204);
     }
 }
