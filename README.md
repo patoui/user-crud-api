@@ -183,3 +183,28 @@ Visit the provided IP address from your terminal (usually [127.0.0.1:8000](http:
     "short_updated_at": "December 22nd 10:59 AM"
 }
 ```
+
+## Delete User
+
+### Request
+
+**URL:** /api/users/{id}
+
+**Action:** DELETE
+
+**Parameters**
+
+| Key | Type | Rules | Description |
+|----|----|----|----|
+| id | string | Required in url | Unique string to identify a user |
+
+### Response
+
+**Status:** 204
+
+**Content-Type:** text/html
+
+**Sample Response (EMPTY)**
+
+```json
+```
