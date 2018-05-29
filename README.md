@@ -1,24 +1,42 @@
 # Requirements
 
 * SQLite
-* PHP ^7.1.3
 * MySQL
+* PHP ^7.1.3
+* Composer
 
 # How to install
 
-Clone the repository, then run composer
+Clone the repository
+
+```bash
+git clone https://github.com/patoui/user-crud-api.git
+```
+
+Run composer
 
 ```bash
 composer install
 ```
 
-To verify build integrity run the tests
+To verify build integrity, run the tests
 
 ```bash
 vendor/bin/phpunit
 ```
 
-Once composer has finished, run artisan commands to migrate and seed the database
+Setting up the database requires you to update your `.env` values. By default SQLite is chosen as the default driver. You may change this to your desired driver, here's an example of MySQL configuration:
+
+```
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=user-crud-api
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+After you're finished with your configuration, run artisan commands to migrate and seed the database
 
 ```bash
 php artisan migrate && php artisan db:seed
@@ -26,7 +44,7 @@ php artisan migrate && php artisan db:seed
 
 *MySQL ONLY. SQLite will not work for this command*
 
-Alternatively you can run the command below which run execute the SQL file provided
+Alternatively you can run the command below which run execute the SQL file provided (`test_db_2017-05-26 (5).sql`)
 
 ```bash
 php artisan run:sql
