@@ -2,6 +2,7 @@
 
 * SQLite
 * PHP ^7.1.3
+* MySQL
 
 # How to install
 
@@ -23,6 +24,7 @@ Once composer has finished, run artisan commands to migrate and seed the databas
 php artisan migrate && php artisan db:seed
 ```
 
+*MySQL ONLY. SQLite will not work for this command*
 Alternatively you can run the command below which run execute the SQL file provided
 
 ```bash
