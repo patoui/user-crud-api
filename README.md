@@ -1,7 +1,6 @@
 # Requirements
 
 * SQLite
-* MySQL
 * PHP ^7.1.3
 
 # How to install
