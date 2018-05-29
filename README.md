@@ -44,19 +44,18 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-After you're finished with your configuration create the database (in the example it's `user-crud-api`), run artisan commands to migrate and seed the database (those using the default SQLite may need to adjust the file permissions for unix/linux run `sudo chmod -R 777 database/database.sqlite`)
+After you're finished with your configuration create the database (in the example it's `user-crud-api`, if you're using SQLite the file should already be in the `database` directory), run artisan commands to migrate and seed the database (those using the default SQLite may need to adjust the file permissions for unix/linux run `sudo chmod 777 database/database.sqlite`)
 
 ```bash
 php artisan migrate && php artisan db:seed
 ```
-
-*MySQL ONLY. SQLite will not work for this command*
 
 Alternatively you can run the command below which run execute the SQL file provided (`test_db_2017-05-26 (5).sql`)
 
 ```bash
 php artisan run:sql
 ```
+*NOTE: The above command will only work for MySQL. SQLite will not work.*
 
 To serve the application run
 
@@ -75,6 +74,13 @@ Visit the provided IP address from your terminal (usually [127.0.0.1:8000](http:
 **URL:** /api/users
 
 **Action:** POST
+
+**Required Headers:**
+
+| Key | Value |
+|----|----|
+| Accept | application/json |
+| Content-Type | application/json |
 
 **Arguments:**
 
@@ -111,6 +117,31 @@ Visit the provided IP address from your terminal (usually [127.0.0.1:8000](http:
     "created_at": "2017-12-22 22:59:59",
     "updated_at": "2017-12-22 22:59:59",
     "short_updated_at": "December 22nd 10:59 AM"
+}
+```
+
+### Failed Response
+
+**Status:** 422
+
+**Content-Type:** application/json
+
+**Sample Response**
+
+```json
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "role": [
+            "The role field is required."
+        ],
+        "username": [
+            "The username field is required."
+        ],
+        "email": [
+            "The email field is required."
+        ]
+    }
 }
 ```
 
@@ -166,6 +197,13 @@ Visit the provided IP address from your terminal (usually [127.0.0.1:8000](http:
 
 **Action:** PUT
 
+**Required Headers:**
+
+| Key | Value |
+|----|----|
+| Accept | application/json |
+| Content-Type | application/json |
+
 **Parameters**
 
 | Key | Type | Rules | Description |
@@ -207,6 +245,30 @@ Visit the provided IP address from your terminal (usually [127.0.0.1:8000](http:
     "created_at": "2017-12-22 22:59:59",
     "updated_at": "2017-12-22 22:59:59",
     "short_updated_at": "December 22nd 10:59 AM"
+}
+```
+### Failed Response
+
+**Status:** 422
+
+**Content-Type:** application/json
+
+**Sample Response**
+
+```json
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "role": [
+            "The role field is required."
+        ],
+        "username": [
+            "The username field is required."
+        ],
+        "email": [
+            "The email field is required."
+        ]
+    }
 }
 ```
 
