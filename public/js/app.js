@@ -13819,6 +13819,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
@@ -13977,28 +13982,54 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "field-body" }, [
               _c("div", { staticClass: "field" }, [
-                _c("div", { staticClass: "control" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.user.role_label,
-                        expression: "user.role_label"
-                      }
-                    ],
-                    staticClass: "input",
-                    attrs: { type: "text" },
-                    domProps: { value: _vm.user.role_label },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                _c("div", { staticClass: "select" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.role_label,
+                          expression: "user.role_label"
                         }
-                        _vm.$set(_vm.user, "role_label", $event.target.value)
+                      ],
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.user,
+                            "role_label",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
                       }
-                    }
-                  })
+                    },
+                    [
+                      _c("option", [_vm._v("Select Role")]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Admin" } }, [
+                        _vm._v("Admin")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Publisher" } }, [
+                        _vm._v("Publisher")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Public User" } }, [
+                        _vm._v("Public User")
+                      ])
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
                 _vm.errors.hasOwnProperty("role")
@@ -14135,6 +14166,10 @@ module.exports = Component.exports
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
 //
 //
 //
@@ -14355,28 +14390,52 @@ var render = function() {
             _vm._v(" "),
             _c("div", { staticClass: "field-body" }, [
               _c("div", { staticClass: "field" }, [
-                _c("div", { staticClass: "control" }, [
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.user.role,
-                        expression: "user.role"
-                      }
-                    ],
-                    staticClass: "input",
-                    attrs: { type: "text" },
-                    domProps: { value: _vm.user.role },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
+                _c("div", { staticClass: "select" }, [
+                  _c(
+                    "select",
+                    {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.role,
+                          expression: "user.role"
                         }
-                        _vm.$set(_vm.user, "role", $event.target.value)
+                      ],
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.$set(
+                            _vm.user,
+                            "role",
+                            $event.target.multiple
+                              ? $$selectedVal
+                              : $$selectedVal[0]
+                          )
+                        }
                       }
-                    }
-                  })
+                    },
+                    [
+                      _c("option", { attrs: { value: "Admin" } }, [
+                        _vm._v("Admin")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Publisher" } }, [
+                        _vm._v("Publisher")
+                      ]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "Public User" } }, [
+                        _vm._v("Public User")
+                      ])
+                    ]
+                  )
                 ]),
                 _vm._v(" "),
                 _vm.errors.hasOwnProperty("role")

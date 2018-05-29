@@ -43,8 +43,12 @@
                     </div>
                     <div class="field-body">
                         <div class="field">
-                            <div class="control">
-                                <input class="input" type="text" v-model="user.role">
+                            <div class="select">
+                                <select v-model="user.role">
+                                    <option value="Admin">Admin</option>
+                                    <option value="Publisher">Publisher</option>
+                                    <option value="Public User">Public User</option>
+                                </select>
                             </div>
                             <div v-if="errors.hasOwnProperty('role')">
                                 <p v-for="error in errors.role" class="help is-danger">{{ error }}</p>
