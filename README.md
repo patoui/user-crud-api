@@ -72,7 +72,7 @@ Visit the provided IP address from your terminal (usually [127.0.0.1:8000](http:
 | role | string | Must be one of the following: Admin, Publisher, Public User |
 | created_at | string | UTC datetime string (format example: 2017-12-22 22:59:59) |
 | updated_at | string | UTC datetime string (format example: 2017-12-22 22:59:59) |
-| short_updated_at | string | America/Toronto datetime string (format: F jS g:i A in example: December 22nd 10:59 AM) |
+| short_updated_at | string | America/Toronto datetime string (format example: December 22nd 10:59 AM) |
 
 **Sample Response**
 
@@ -110,7 +110,7 @@ Visit the provided IP address from your terminal (usually [127.0.0.1:8000](http:
 | role | string | Must be one of the following: Admin, Publisher, Public User |
 | created_at | string | UTC datetime string (format example: 2017-12-22 22:59:59) |
 | updated_at | string | UTC datetime string (format example: 2017-12-22 22:59:59) |
-| short_updated_at | string | America/Toronto datetime string (format: F jS g:i A in example: December 22nd 10:59 AM) |
+| short_updated_at | string | America/Toronto datetime string (format example: December 22nd 10:59 AM) |
 
 **Sample Response**
 
