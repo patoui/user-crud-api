@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class UserApiController extends Controller
 {
     /**
-     * Display the specified resource.
+     * List all users.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -20,7 +20,7 @@ class UserApiController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a new user.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -46,7 +46,7 @@ class UserApiController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Show a user.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -57,7 +57,7 @@ class UserApiController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update a user.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -90,7 +90,7 @@ class UserApiController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Delete a user.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response

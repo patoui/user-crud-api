@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     /**
-     * Display a list of users.
+     * List all users.
      *
      * @return \Illuminate\Http\Response
      */
