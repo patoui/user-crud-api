@@ -52,11 +52,11 @@ Visit the provided IP address from your terminal (usually [127.0.0.1:8000](http:
 
 **Arguments:**
 
-| Key | Type | Description |
-|----|----|----|
-| username | string | A string used to label a user |
-| email | string | A valid email address following (valid per [RFC 822](https://www.ietf.org/rfc/rfc822.txt)) |
-| role | string | Must be one of the following: Admin, Publisher, Public User |
+| Key | Type | Rules | Description |
+|----|----|----|----|
+| username | string | required | The user's name label |
+| email | string | required, email (valid per [RFC 822](https://www.ietf.org/rfc/rfc822.txt)) | The user's email address |
+| role | string | required, must be one of: Admin, Publisher, Public User | The user's role |
 
 ### Response
 
@@ -95,6 +95,64 @@ Visit the provided IP address from your terminal (usually [127.0.0.1:8000](http:
 **URL:** /api/users/{id}
 
 **Action:** GET
+
+**Parameters**
+
+| Key | Type | Rules | Description |
+|----|----|----|----|
+| id | string | Required in url | Unique string to identify a user |
+
+### Response
+
+**Status:** 200
+
+**Content-Type:** application/json
+
+| Key | Type | Description |
+|----|----|----|
+| id | string | Unique string to identify a user |
+| username | string | A string used to label a user |
+| email | string | A valid email address following (valid per [RFC 822](https://www.ietf.org/rfc/rfc822.txt)) |
+| role | string | Must be one of the following: Admin, Publisher, Public User |
+| created_at | string | UTC datetime string (format example: 2017-12-22 22:59:59) |
+| updated_at | string | UTC datetime string (format example: 2017-12-22 22:59:59) |
+| short_updated_at | string | America/Toronto datetime string (format example: December 22nd 10:59 AM) |
+
+**Sample Response**
+
+```json
+{
+    "id": "ypazj",
+    "username": "New Admin",
+    "email": "new-admin@test.com",
+    "role": "Admin",
+    "created_at": "2017-12-22 22:59:59",
+    "updated_at": "2017-12-22 22:59:59",
+    "short_updated_at": "December 22nd 10:59 AM"
+}
+```
+
+## Update User
+
+### Request
+
+**URL:** /api/users/{id}
+
+**Action:** PUT
+
+**Parameters**
+
+| Key | Type | Rules | Description |
+|----|----|----|----|
+| id | string | Required in url | Unique string to identify a user |
+
+**Arguments:**
+
+| Key | Type | Rules | Description |
+|----|----|----|----|
+| username | string | required | The user's name label |
+| email | string | required, email (valid per [RFC 822](https://www.ietf.org/rfc/rfc822.txt)) | The user's email address |
+| role | string | required, must be one of: Admin, Publisher, Public User | The user's role |
 
 ### Response
 
