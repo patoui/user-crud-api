@@ -1,4 +1,6 @@
-# User CRUD Api
+# User CRUD API
+
+![Sample](https://raw.githubusercontent.com/patoui/user-crud-api/master/sample.png)
 
 # Requirements
 
