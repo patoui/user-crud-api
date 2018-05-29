@@ -48,13 +48,12 @@ After you're finished with your configuration create the database (in the exampl
 php artisan migrate && php artisan db:seed
 ```
 
-*MySQL ONLY. SQLite will not work for this command*
-
 Alternatively you can run the command below which run execute the SQL file provided (`test_db_2017-05-26 (5).sql`)
 
 ```bash
 php artisan run:sql
 ```
+*NOTE: The above command will only work for MySQL. SQLite will not work.*
 
 To serve the application run
 
