@@ -6,7 +6,6 @@ use App\User;
 use DB;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class DeleteUserApiTest extends TestCase
@@ -24,7 +23,6 @@ class DeleteUserApiTest extends TestCase
         // Arrange
         $user = factory(User::class)->states(['admin'])->create();
         $readUser = factory(User::class)->states(['public-user'])->create();
-        Passport::actingAs($user);
         $this->assertEquals(
             1,
             DB::table('users')->where('id', $readUser->id)->count()

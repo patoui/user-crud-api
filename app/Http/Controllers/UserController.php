@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use Auth;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -15,7 +14,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        Auth::loginUsingId(User::value('id'));
         return view('users.index')->with('users', User::get());
     }
 }

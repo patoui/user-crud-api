@@ -6,7 +6,6 @@ use App\Role;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class ListUsersApiTest extends TestCase
@@ -32,7 +31,6 @@ class ListUsersApiTest extends TestCase
             'username' => 'Jane Doe',
             'user_roles_id' => $public->id,
         ]);
-        Passport::actingAs($user);
 
         // Act
         $response = $this->getJson('/api/users');

@@ -6,7 +6,6 @@ use App\Role;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class CreateUserApiTest extends TestCase
@@ -22,9 +21,7 @@ class CreateUserApiTest extends TestCase
     public function create_user()
     {
         // Arrange
-        $user = factory(User::class)->states(['admin'])->create();
         factory(Role::class)->states(['public-user'])->create();
-        Passport::actingAs($user);
 
         // Act
         $response = $this->postJson('/api/users', [

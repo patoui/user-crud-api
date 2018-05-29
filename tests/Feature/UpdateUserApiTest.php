@@ -6,7 +6,6 @@ use App\Role;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
-use Laravel\Passport\Passport;
 use Tests\TestCase;
 
 class UpdateUserApiTest extends TestCase
@@ -28,7 +27,6 @@ class UpdateUserApiTest extends TestCase
             'username' => 'Jane Doe',
             'email' => 'jane.doe@test.com',
         ]);
-        Passport::actingAs($user);
 
         // Act
         $response = $this->putJson("/api/users/{$readUser->getRouteKey()}", [
