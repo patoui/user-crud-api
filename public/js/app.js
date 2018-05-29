@@ -13557,7 +13557,7 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(user.email))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(user.role_label))]),
+                        _c("td", [_vm._v(_vm._s(user.role))]),
                         _vm._v(" "),
                         _c("td", { staticStyle: { "text-align": "right" } }, [
                           _vm._v(_vm._s(user.short_updated_at))
@@ -13842,7 +13842,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             axios.put('/api/users/' + this.user.encoded_id, {
                 username: this.user.username,
                 email: this.user.email,
-                role: this.user.role_label
+                role: this.user.role
             }).then(function (response) {
                 self.$emit('save');
             }).catch(function (error) {
@@ -13990,8 +13990,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.user.role_label,
-                          expression: "user.role_label"
+                          value: _vm.user.role,
+                          expression: "user.role"
                         }
                       ],
                       on: {
@@ -14006,7 +14006,7 @@ var render = function() {
                             })
                           _vm.$set(
                             _vm.user,
-                            "role_label",
+                            "role",
                             $event.target.multiple
                               ? $$selectedVal
                               : $$selectedVal[0]

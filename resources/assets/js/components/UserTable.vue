@@ -24,7 +24,7 @@
                         <tr v-for="user in dataUsers" :key="user.encoded_id">
                             <td>{{ user.username }}</td>
                             <td>{{ user.email }}</td>
-                            <td>{{ user.role_label }}</td>
+                            <td>{{ user.role }}</td>
                             <td style="text-align: right;">{{ user.short_updated_at }}</td>
                             <td style="text-align: right;">
                                 <span @click="openRead(user)" class="icon" style="cursor: pointer;">

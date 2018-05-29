@@ -44,7 +44,7 @@
                     <div class="field-body">
                         <div class="field">
                             <div class="select">
-                                <select v-model="user.role_label">
+                                <select v-model="user.role">
                                     <option>Select Role</option>
                                     <option value="Admin">Admin</option>
                                     <option value="Publisher">Publisher</option>
@@ -83,7 +83,7 @@
                 axios.put('/api/users/' + this.user.encoded_id, {
                     username: this.user.username,
                     email: this.user.email,
-                    role: this.user.role_label
+                    role: this.user.role
                 })
                 .then(function (response) {
                     self.$emit('save');
