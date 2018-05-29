@@ -38,7 +38,7 @@
                     <div class="field-body">
                         <div class="field">
                             <div class="control">
-                                <input class="input" type="text" v-model="user.role_label" disabled>
+                                <input class="input" type="text" v-model="user.role" disabled>
                             </div>
                         </div>
                     </div>
