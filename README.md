@@ -42,7 +42,7 @@ DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-After you're finished with your configuration create the database (in the example it's `user-crud-api`), run artisan commands to migrate and seed the database
+After you're finished with your configuration create the database (in the example it's `user-crud-api`), run artisan commands to migrate and seed the database (those using the default SQLite may need to adjust the file permissions for unix/linux run `sudo chmod -R 777 database/database.sqlite`)
 
 ```bash
 php artisan migrate && php artisan db:seed
