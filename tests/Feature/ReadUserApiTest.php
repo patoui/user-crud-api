@@ -8,7 +8,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 
-class ReadUserTest extends TestCase
+class ReadUserApiTest extends TestCase
 {
     use RefreshDatabase;
 

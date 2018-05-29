@@ -9,7 +9,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Laravel\Passport\Passport;
 use Tests\TestCase;
 
-class DeleteUserTest extends TestCase
+class DeleteUserApiTest extends TestCase
 {
     use RefreshDatabase;
 
