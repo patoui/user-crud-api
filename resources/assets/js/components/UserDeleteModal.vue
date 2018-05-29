@@ -32,7 +32,7 @@
             // couldn't use "delete" as the function name, it's a reserved word
             deleteUser() {
                 var self = this;
-                axios.delete('/api/users/' + this.user.encoded_id)
+                axios.delete('/api/users/' + this.user.id)
                     .then(function (response) {
                         self.$emit('deleteUser');
                     })

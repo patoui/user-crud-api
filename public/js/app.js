@@ -14607,7 +14607,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         // couldn't use "delete" as the function name, it's a reserved word
         deleteUser: function deleteUser() {
             var self = this;
-            axios.delete('/api/users/' + this.user.encoded_id).then(function (response) {
+            axios.delete('/api/users/' + this.user.id).then(function (response) {
                 self.$emit('deleteUser');
             }).catch(function (error) {
                 self.errors = error.response.data.errors;
