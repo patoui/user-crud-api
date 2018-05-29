@@ -118,6 +118,31 @@ Visit the provided IP address from your terminal (usually [127.0.0.1:8000](http:
 }
 ```
 
+### Failed Response
+
+**Status:** 422
+
+**Content-Type:** application/json
+
+**Sample Response**
+
+```json
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "role": [
+            "The role field is required."
+        ],
+        "username": [
+            "The username field is required."
+        ],
+        "email": [
+            "The email field is required."
+        ]
+    }
+}
+```
+
 ## Read User
 
 ### Request
@@ -218,6 +243,30 @@ Visit the provided IP address from your terminal (usually [127.0.0.1:8000](http:
     "created_at": "2017-12-22 22:59:59",
     "updated_at": "2017-12-22 22:59:59",
     "short_updated_at": "December 22nd 10:59 AM"
+}
+```
+### Failed Response
+
+**Status:** 422
+
+**Content-Type:** application/json
+
+**Sample Response**
+
+```json
+{
+    "message": "The given data was invalid.",
+    "errors": {
+        "role": [
+            "The role field is required."
+        ],
+        "username": [
+            "The username field is required."
+        ],
+        "email": [
+            "The email field is required."
+        ]
+    }
 }
 ```
 
