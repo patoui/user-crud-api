@@ -8,6 +8,7 @@
 * MySQL
 * PHP ^7.1.3
 * Composer
+* Additional [Laravel Server Requirements](https://laravel.com/docs/5.6/installation#server-requirements)
 
 # How to install
 
@@ -41,12 +42,12 @@ Setting up the database requires you to update your `.env` values. By default SQ
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=user-crud-api
+DB_DATABASE=user_crud_api
 DB_USERNAME=root
 DB_PASSWORD=
 ```
 
-After you're finished with your configuration create the database (in the example it's `user-crud-api`, if you're using SQLite the file should already be in the `database` directory), run artisan commands to migrate and seed the database (those using the default SQLite may need to adjust the file permissions for unix/linux run `sudo chmod 777 database/database.sqlite`)
+After you're finished with your configuration create the database (in the example it's `user_crud_api`, if you're using SQLite the file should already be in the `database` directory), run artisan commands to migrate and seed the database (those using the default SQLite may need to adjust the file permissions for unix/linux run `sudo chmod 777 database/database.sqlite`)
 
 ```bash
 php artisan migrate && php artisan db:seed
@@ -66,6 +67,8 @@ php artisan serve
 ```
 
 Visit the provided IP address from your terminal (usually [127.0.0.1:8000](http://127.0.0.1:8000))
+
+*If you get an error that says "Missing BC Math or GMP extension" make sure one of them is enabled in your php.ini*
 
 # API Documentation
 
