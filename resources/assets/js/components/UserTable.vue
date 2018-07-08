@@ -119,7 +119,7 @@
                 this.isCreateActive = false;
             },
             onCloseDelete() {
-                this.isUpdateActive = false;
+                this.isDeleteActive = false;
             },
             onCloseUpdate() {
                 this.isUpdateActive = false;
