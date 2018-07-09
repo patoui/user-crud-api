@@ -38,8 +38,7 @@ class RunSql extends Command
      */
     public function handle()
     {
-        $path = base_path('test_db_2017-05-26 (5).sql');
-        DB::unprepared(file_get_contents($path));
+        DB::unprepared(file_get_contents(base_path('seed-db.sql')));
         $this->info('SQL file has run!');
     }
 }
