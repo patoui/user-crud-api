@@ -53,7 +53,7 @@ After you're finished with your configuration create the database (in the exampl
 php artisan migrate && php artisan db:seed
 ```
 
-Alternatively you can run the command below which run execute the SQL file provided (`test_db_2017-05-26 (5).sql`)
+Alternatively you can run the command below which run execute the SQL file provided (`seed-db.sql`)
 
 ```bash
 php artisan run:sql
